@@ -1,11 +1,12 @@
 import './App.css';
-import {BrowserRouter, Switch, Route, useHistory} from 'react-router-dom';
+import {BrowserRouter, Switch, Route, useHistory, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import React, {useState} from "react";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
+import AfterLogin from "./pages/AfterLogin/AfterLogin";
 
 function App() {
     const history = useHistory();
@@ -20,9 +21,9 @@ function App() {
             .then(res => {
                 localStorage.setItem('token', res.data.token);
                 setName(res.data.fname + ' ' + res.data.lname);
-                console.log(res.data);
             })
             .catch(error => {
+                console.log(error);
                 MySwal.fire({
                     icon: 'error',
                     title: <p>Oops, an error occured</p>,
@@ -50,8 +51,6 @@ function App() {
         axios.post(`http://localhost:8000/api/register`, register)
             .then(res => {
                 console.log(res.data);
-                history.push('/register');
-
             })
             .catch(error => {
                 MySwal.fire({
@@ -71,6 +70,11 @@ function App() {
             });
     };
 
+    const navigateToComp = (location) => {
+        console.log(history);
+        history.push(location)
+    };
+
     const goToLogin = () => {
         return (
             <Login postLogin={postLogin}/>
@@ -82,12 +86,19 @@ function App() {
             <Register postRegister={postRegister}/>
         );
     };
+
+    const goToAfterLogin = () => {
+        return (
+            <AfterLogin name={name}/>
+        );
+    };
     return (
         <div className="app-wrapper align-items-center justify-content-center text-center d-flex">
             <BrowserRouter>
                 <Switch>
                     <Route exact path='/login' component={goToLogin}/>
                     <Route exact path='/register' component={goToRegister}/>
+                    <Route exact path='/afterlogin' component={goToAfterLogin}/>
                     <Route exact path='/' component={Login}/>
                 </Switch>
             </BrowserRouter>

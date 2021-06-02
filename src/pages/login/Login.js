@@ -10,7 +10,7 @@ function Login({postLogin}) {
     const handleSubmit = (evt) => {
         evt.preventDefault();
         postLogin(email, password);
-
+        history.push('/afterlogin')
     };
 
     const validateEmail = (emailAdress) => {

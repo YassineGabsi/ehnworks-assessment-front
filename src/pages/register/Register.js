@@ -16,7 +16,7 @@ function Register({postRegister}) {
     const handleSubmit = (evt) => {
         evt.preventDefault();
         postRegister(firstname, lastname, email, password, phone);
-
+        history.push('/login');
     };
 
     const validateEmail = (emailAdress) => {
