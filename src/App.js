@@ -1,5 +1,5 @@
 import './App.css';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {BrowserRouter, Switch, Route, useHistory} from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -8,6 +8,7 @@ import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 
 function App() {
+    const history = useHistory();
     const [name, setName] = useState("");
     const MySwal = withReactContent(Swal);
 
@@ -39,9 +40,46 @@ function App() {
             });
     };
 
+    const postRegister = (firstname, lastname, email, password, phone) => {
+        const register = new FormData();
+        register.append('email', email);
+        register.append('password', password);
+        register.append('fname', firstname);
+        register.append('lname', lastname);
+        register.append('phone', phone);
+        axios.post(`http://localhost:8000/api/register`, register)
+            .then(res => {
+                console.log(res.data);
+                history.push('/register');
+
+            })
+            .catch(error => {
+                MySwal.fire({
+                    icon: 'error',
+                    title: <p>Oops, an error occured</p>,
+                    text: 'Please provide valid informations',
+                    showCloseButton: true,
+                    showCancelButton: true,
+                    focusConfirm: false,
+                    confirmButtonText: 'Login',
+                    cancelButtonText: 'Close',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '/login'
+                    }
+                })
+            });
+    };
+
     const goToLogin = () => {
         return (
             <Login postLogin={postLogin}/>
+        );
+    };
+
+    const goToRegister = () => {
+        return (
+            <Register postRegister={postRegister}/>
         );
     };
     return (
@@ -49,7 +87,7 @@ function App() {
             <BrowserRouter>
                 <Switch>
                     <Route exact path='/login' component={goToLogin}/>
-                    <Route exact path='/register' component={Register}/>
+                    <Route exact path='/register' component={goToRegister}/>
                     <Route exact path='/' component={Login}/>
                 </Switch>
             </BrowserRouter>

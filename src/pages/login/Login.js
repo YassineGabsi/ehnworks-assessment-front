@@ -24,7 +24,7 @@ function Login({postLogin}) {
 
     return (
         <div className="form-wrapper">
-            <p className="fw-bold">Create your Account</p>
+            <p className="fw-bold">Login to your Account</p>
             <form onSubmit={handleSubmit} style={{display: "grid"}}>
                 {email.length !== 0 && !validateEmail(email) ?
                     (<div className="error-input">Please provide a valid email</div>) : null}
@@ -35,15 +35,15 @@ function Login({postLogin}) {
                        required
                        placeholder="Email Address"
                        type="text"/>
-                {password.length !== 0 && password.length <= 4 ?
-                    (<div className="error-input mt-2">Please provide a valid Password</div>) : null}
+                {password.length !== 0 && password.length < 8 ?
+                    (<div className="error-input mt-2">Please provide a valid Password ( min 8 characters )</div>) : null}
                 <input value={password}
                        onChange={e => setPassword(e.target.value)}
                        className="form-input mt-4"
                        name="password"
                        required
                        placeholder="Password" type="password"/>
-                <button type="submit" disabled={!validateEmail(email) || password.length <= 4}
+                <button type="submit" disabled={!validateEmail(email) || password.length < 8}
                         className="form-button mt-4">LOGIN
                 </button>
                 <div className="mt-3 fw-bold">No account yet ?
