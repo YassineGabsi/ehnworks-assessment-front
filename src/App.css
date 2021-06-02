@@ -1,4 +1,57 @@
+* {
+    outline: none !important;
+}
+
 .app-wrapper {
     background-image: linear-gradient(to right top, #99cffe, #84bcf1, #70aae4, #5d98d6, #4986c9);
     height: 100vh;
+}
+
+.form-wrapper {
+    background-color: #f6f6f6;
+    border-radius: 15px;
+    padding: 35px;
+    min-width: 35vw;
+    display: grid;
+}
+
+.form-input {
+    border: none;
+    border-bottom: 2px solid dimgrey ;
+    background-color: #f6f6f6;
+    min-width: 25vw;
+    padding: 10px;
+    transition: 0.3s all ease-in-out !important;
+}
+
+.form-input:focus {
+    border-bottom: none;
+    background-color: #5d98d6;
+    color: #f6f6f6;
+    border-radius: 10px;
+    transition: 0.3s all ease-in-out !important;
+}
+
+.form-input:focus::placeholder {
+    color: #f6f6f6;
+    transition: 0.3s all ease-in-out !important;
+}
+
+.form-button {
+    padding: 15px;
+    border-radius: 15px;
+    background-color: #5886c5;
+    border: none;
+    color: #f6f6f6;
+    font-weight: bold;
+    letter-spacing: 5px;
+    transition: 0.3s all ease-in-out !important;
+}
+
+.form-button:hover {
+    padding: 15px;
+    border-radius: 15px;
+    background-color: #a4cffb;
+    color: #000000;
+    transition: 0.3s all ease-in-out !important;
 }
