@@ -1,0 +1,4 @@
+.app-wrapper {
+    background-image: linear-gradient(to right top, #99cffe, #84bcf1, #70aae4, #5d98d6, #4986c9);
+    height: 100vh;
+}

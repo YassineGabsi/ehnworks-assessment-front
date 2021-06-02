@@ -6,7 +6,7 @@ import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 function App() {
   return (
-    <div className="App">
+    <div className="app-wrapper align-items-center justify-content-center text-center d-flex">
       <BrowserRouter>
         <Switch>
           <Route exact path='/login' component={Login}/>
