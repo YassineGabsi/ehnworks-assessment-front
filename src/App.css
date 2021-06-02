@@ -55,3 +55,9 @@
     color: #000000;
     transition: 0.3s all ease-in-out !important;
 }
+
+.error-input {
+    color: darkred;
+    font-weight: bold;
+    text-align: start !important;
+}
